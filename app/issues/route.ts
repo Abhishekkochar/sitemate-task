@@ -10,9 +10,10 @@ interface Issue {
 let issues: Issue[] = [
   { id: 1, title: 'Issue 1', description: 'This is the first issue' },
   { id: 2, title: 'Issue 2', description: 'This is the second issue' },
+  { id: 3, title: 'Issue 3', description: 'This is the thrid issue' },
 ];
 
-// This API get us all the issues
+// This API get all the issues
 export async function GET(){
   try{
     console.log(issues)
@@ -22,6 +23,7 @@ export async function GET(){
   }
 }
 
+// This Api will add the new API at issues[length-1]
 export async function POST(req: NextApiRequest){
   try{
     const newIssue: Issue = await req.json();
@@ -31,8 +33,9 @@ export async function POST(req: NextApiRequest){
   } catch(e){
     console.error(e)
   }
-    
 }
+
+// This API will edit/update the Issue based on the ID
 export async function PUT(req: NextApiRequest){
   try{
     const updatedIssue: Issue = await req.json();
@@ -41,9 +44,10 @@ export async function PUT(req: NextApiRequest){
     return NextResponse.json(issues, {status:200})
   } catch(e){
     console.error(e)
-  }
-    
+  }   
 }
+
+// This API will delete the Issue based on the ID
 export async function DELETE(req: NextApiRequest) {
   try{
     const searchParams = req.nextUrl.searchParams;

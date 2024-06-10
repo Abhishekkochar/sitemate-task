@@ -22,6 +22,7 @@ export default function Home() {
     fetchIssues();
   }, []);
 
+  // Fetching all issues
   async function fetchIssues(){
     try {
       const response = await axios.get('/issues');
@@ -32,6 +33,7 @@ export default function Home() {
     }
   };
 
+  // Creating new issue
   async function createIssue(){
     try {
       const newIssue: Issue = { id, title, description };
@@ -45,6 +47,7 @@ export default function Home() {
     }
   };
 
+    // Updating issue base on issue Id
   async function updateIssue(){
     try {
       const updatedIssue: Issue = { id:updateId, title, description };
@@ -60,6 +63,7 @@ export default function Home() {
     }
   };
 
+  // Deleting issue based on ID
   async function deleteIssue(id: number){
     try {
       await axios.delete(`/issues?id=${id}`);
@@ -90,8 +94,7 @@ export default function Home() {
       <div className='w-full max-w-xs bg-amber-400 shadow-md rounded px-8 pt-6 pb-8'>
         {isEditing && <Input label="ID" placeholder="ID" value={updateId} handle={handleUpdateId}/>}
         <Input label="Title" placeholder="Title" value={title} handle={handleTitle}/>
-        <Input label="Description" placeholder="Description" value={description} handle={handleDescription}/>
-        
+        <Input label="Description" placeholder="Description" value={description} handle={handleDescription}/>  
         {
           isEditing ?  <Button handle={updateIssue} name='Update'/> :
             <>
@@ -99,10 +102,9 @@ export default function Home() {
               <Button handle={handleIsEditing} name='Edit'/>
             </>
         }
-      
       </div>
       <div className='w-full max-w-screen-md min-h-fit bg-amber-400 shadow-md rounded px-8 pt-6 mt-12'>
-        <h2 className='underline decoration-solid'>Current Issues</h2>
+        <h2 className='underline decoration-solid font-bold'>Current Issues</h2>
         <ul>
           {issues.map(issue => (
             <li key={issue.id}>
